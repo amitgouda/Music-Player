@@ -1,0 +1,10 @@
+.parent-app-router {
+  height: 100%;
+}
+
+@media only screen and (orientation: landscape) and (max-height: 450px) {
+  .parent-app-router {
+    height: 100%;
+    overflow: scroll;
+  }
+}
