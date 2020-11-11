@@ -1,0 +1,18 @@
+.rootSearchContainer {
+  background-color: yellowgreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  flex-direction: row;
+}
+.search-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}

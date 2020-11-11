@@ -1,0 +1,21 @@
+.rootContainer {
+  height: inherit;
+  display: flex;
+  justify-content: center;
+}
+.searchtabContainer {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 30px;
+  width: calc(100% - 150px);
+  display: flex;
+  flex-direction: column;
+}
+.mainTabContainer {
+  padding-left: 30px;
+  padding-right: 30px;
+  align-items: center;
+  justify-items: center;
+  display: flex;
+  flex-direction: column;
+}
