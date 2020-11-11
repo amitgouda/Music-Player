@@ -1,18 +1,21 @@
 import React from "react";
 import CustomListCard from "../../SharedComponent/CustomSongListCard";
-import { SONGS_CONSTANTS } from "../Home/constants";
+import { useSelector } from "react-redux";
 
 const SongstabComponent = () => {
+  const songLists = useSelector((state) => state.commonReducer.songList);
+  const convertToMin = (time) => (time / 60).toFixed(2) + " sec";
+
   return (
     <React.Fragment>
-      {SONGS_CONSTANTS.map((songItem, index) => (
+      {songLists.map((songItem, index) => (
         <CustomListCard
-          lastElement={index + 1 === SONGS_CONSTANTS.length}
+          lastElement={index + 1 === songLists.length}
           key={songItem._id}
-          songTitle={songItem.name}
-          singerName={songItem.singers}
-          albumName={songItem.album}
-          playTime={songItem.time}
+          songTitle={songItem.title}
+          singerName={songItem.singer}
+          albumName={songItem?.albumData?.title || ""}
+          playTime={convertToMin(songItem.playTime)}
         />
       ))}
     </React.Fragment>

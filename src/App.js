@@ -1,11 +1,10 @@
-import './App.css';
-import HomeComponents  from './Components/Home'
-import AppRouter  from './SharedComponent/appRouter';
+import AppRouter from "./SharedComponent/appRouter";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-       <AppRouter />
+      <AppRouter />
     </div>
   );
 }

@@ -3,13 +3,13 @@ import CustomPaper from "../CustomPaper";
 import "./style.css";
 
 const CustomPlayListCard = ({
-    playlistTitle = "asdasds",
+  playlistTitle = "asdasds",
   playTime = "asdasds",
-  lastElement
+  lastElement,
 }) => {
   return (
-    <div style={{marginTop:10,paddingBottom: lastElement? 25:0}} >
-      <CustomPaper elevation={5} >
+    <div style={{ marginTop: 10, paddingBottom: lastElement ? 25 : 0 }}>
+      <CustomPaper elevation={5}>
         <div className={"listRootContainer"}>
           <div>
             <div className={"card-text-div-style"}>

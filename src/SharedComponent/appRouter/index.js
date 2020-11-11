@@ -19,7 +19,7 @@ const AppRouter = () => {
             ROUTES.length &&
             ROUTES.map((route, index) => {
               const isLoggedInAlready = false;
-              let path = (route && route.url);
+              let path = route && route.url;
               if (route.private) {
                 return (
                   <PrivateRoute
@@ -34,7 +34,7 @@ const AppRouter = () => {
                 return (
                   <Route
                     key={index}
-                    path={(route && route.url)}
+                    path={route && route.url}
                     exact={route.exact}
                     component={route.component}
                     {...route}

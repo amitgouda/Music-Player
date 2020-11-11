@@ -5,10 +5,8 @@ import "./style.css";
 
 const CustomSearchBar = () => {
   return (
-    <div
-      className={"rootSearchContainer"}
-    >
-      <div className={"search-container"} >
+    <div className={"rootSearchContainer"}>
+      <div className={"search-container"}>
         <div style={{ marginRight: "4px" }}>
           <SearchIcon color={"white"} />
         </div>

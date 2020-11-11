@@ -3,7 +3,11 @@ import CustomPaperComponent from "../CustomPaper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
-const CustomTabsComponent = ({ activeValue=1, tabNames = [],handleChange }) => {
+const CustomTabsComponent = ({
+  activeValue = 1,
+  tabNames = [],
+  handleChange,
+}) => {
   return (
     <CustomPaperComponent>
       <Tabs
@@ -14,7 +18,11 @@ const CustomTabsComponent = ({ activeValue=1, tabNames = [],handleChange }) => {
         aria-label="disabled tabs example"
       >
         {tabNames.map((tabItem, index) => (
-          <Tab key={`${tabItem.label}_${index}`} icon={tabItem.icon} label={tabItem.label || ""} />
+          <Tab
+            key={`${tabItem.label}_${index}`}
+            icon={tabItem.icon}
+            label={tabItem.label || ""}
+          />
         ))}
       </Tabs>
     </CustomPaperComponent>

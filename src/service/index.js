@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getToken = () => {
   return "";
-}
+};
 
 const parsedError = (error) => {
   let response;
@@ -19,14 +19,16 @@ const parsedError = (error) => {
     return {
       message: message,
       status: response.status,
-    }
+    };
   } else if (response.status === 404) {
     return Promise.reject({
       message: "Page Not Found",
       status: response.status,
     });
   } else {
-    const message = error.response ? (response && response.data && response.data.message) : error.message;
+    const message = error.response
+      ? response && response.data && response.data.message
+      : error.message;
 
     return {
       message: message,

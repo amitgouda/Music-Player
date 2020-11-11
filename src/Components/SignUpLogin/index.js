@@ -4,8 +4,6 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Typography,
@@ -13,16 +11,16 @@ import {
   Paper,
   withStyles,
 } from "@material-ui/core";
-import "./style.css";
-import APICall from "../../service";
+import { loginApi, signUpApi } from "../../service/auth.service";
 import { useHistory, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+
+import "./style.css";
 
 const SignUp = ({ classes, match, ...props }) => {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [password, setPassword] = useState("");
-  const [promotion, setpromotion] = useState(false);
   const [email, setEmail] = useState("");
   const [errorObject, setErrorObject] = useState({
     inValidFirstName: true,
@@ -66,51 +64,41 @@ const SignUp = ({ classes, match, ...props }) => {
   const history = useHistory();
 
   const handleOnSignUpSuccess = () => {
-    history.push("/login");
     setfirstName("");
     setlastName("");
     setEmail("");
     setPassword("");
-    setpromotion(false);
+    history.push("/login");
   };
 
   const handleOnLoginSignup = (e) => {
     e.preventDefault();
     if (!isFromLoginUrl) {
       if (validate("signUp")) {
-        APICall(
-          "user/signup",
+        signUpApi(
           {
             firstName,
             lastName,
             email,
             password,
-            roleId: 1,
-            promotion: promotion || false,
           },
-          "post"
-        )
-          .then((res) => {
-            handleOnSignUpSuccess()
-          })
+          handleOnSignUpSuccess
+        );
       }
     } else {
       if (validate()) {
-        APICall("user/signin", { email, password: password }, "post")
-          .then((res) => {
-            if (!isEmptyObject(res.data)) {
-              const userData = {
-                token: String(res.data.token),
-                firstName: String(res.data.firstName),
-                lastName: String(res.data.lastName),
-                roleId: String(res.data.roleId),
-                profilePicture: String(res.data.profilePicture) || null,
-              };
-              localStorage.setItem("userData", JSON.stringify(userData));
-              history.push("/home");
-            }
-          })
+        loginApi({ email, password: password }, signinResultjandler);
       }
+    }
+  };
+
+  const signinResultjandler = (res) => {
+    if (!isEmptyObject(res.data)) {
+      const userData = {
+        token: String(res.data.token),
+      };
+      localStorage.setItem("userData", JSON.stringify(userData));
+      history.push("/");
     }
   };
 
@@ -286,26 +274,6 @@ const SignUp = ({ classes, match, ...props }) => {
                     FormControlLabel={password}
                   />
                 </Grid>
-                {!isFromLoginUrl && (
-                  <Grid item xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          value="allowExtraEmails"
-                          color="primary"
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setpromotion(true);
-                            } else {
-                              setpromotion(false);
-                            }
-                          }}
-                        />
-                      }
-                      label="I want to receive inspirational, marketing and promotional updates via email."
-                    />
-                  </Grid>
-                )}
               </Grid>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -324,8 +292,7 @@ const SignUp = ({ classes, match, ...props }) => {
                   OR
                 </Grid>
                 <Grid item xs={12}>
-                  <div className="google-login-button" data-width="100%">
-                  </div>
+                  <div className="google-login-button" data-width="100%"></div>
                 </Grid>
               </Grid>
               <Grid container justify="flex-end">
