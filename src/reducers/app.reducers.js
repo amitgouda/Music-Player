@@ -1,6 +1,6 @@
 import commonActionTypes from "../Actions/ActionTypes/common";
 
-const iState = { isOpen: false, messageType: "", message: "", songList: [] };
+const iState = { isOpen: false, messageType: "", message: "", songList: [],playList:[],searchString:"" };
 
 export default (state = iState, action) => {
   switch (action.type) {
@@ -16,6 +16,12 @@ export default (state = iState, action) => {
       break;
     case commonActionTypes.SET_SONGS_LIST:
       state.songList = action.payload;
+      break;
+    case commonActionTypes.SET_PLAYLIST_LIST:
+      state.playList = action.payload;
+      break;
+    case commonActionTypes.SET_SEARCH_SONGS_LIST:
+      state.searchString = action.payload;
       break;
     default:
       break;

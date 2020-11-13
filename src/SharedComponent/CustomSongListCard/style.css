@@ -1,8 +1,17 @@
-.listRootContainer{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px
+.listRootContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
-.card-text-div-style{
-    display: flex;
+.card-text-div-style {
+  display: flex;
+}
+.card-right-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 270px;
+}
+.card-left-container {
+  width: fit-content;
 }

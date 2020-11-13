@@ -24,3 +24,17 @@ export const setSongsState = (data = []) => {
     payload: data,
   };
 };
+
+export const setSongsSearchState = (data = '') => {
+  return {
+    type: commonActionType.SET_SEARCH_SONGS_LIST,
+    payload: data,
+  };
+};
+
+export const setPlaylistState = (data = []) => {
+  return {
+    type: commonActionType.SET_PLAYLIST_LIST,
+    payload: data,
+  };
+};

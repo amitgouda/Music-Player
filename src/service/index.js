@@ -53,7 +53,7 @@ const parseBody = (response) => {
 };
 
 const instance = axios.create({
-  baseURL: "http://48bdf13580ca.ngrok.io/api/",
+  baseURL: "http://localhost:8000/api/",
 });
 
 instance.interceptors.request.use(

@@ -1,7 +1,8 @@
 .listRootContainer{
     display: flex;
     justify-content: space-between;
-    padding: 10px
+    flex-wrap: wrap;
+    padding: 10px;
 }
 .card-text-div-style{
     display: flex;

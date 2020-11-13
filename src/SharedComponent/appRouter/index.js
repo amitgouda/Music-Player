@@ -1,24 +1,18 @@
 import React from "react";
-import {
-  Switch,
-  Route,
-  Router as BrowserRouter,
-  Redirect,
-} from "react-router-dom";
+import { Switch, Route, BrowserRouter} from "react-router-dom";
 import PrivateRoute from "./PrivateRouter";
 import { ROUTES } from "./Constants";
+
 import "./appRouter.css";
-import history from "../helpers/history";
 
 const AppRouter = () => {
   return (
     <div className="parent-app-router">
-      <BrowserRouter history={history}>
+      <BrowserRouter>
         <Switch>
           {ROUTES &&
             ROUTES.length &&
             ROUTES.map((route, index) => {
-              const isLoggedInAlready = false;
               let path = route && route.url;
               if (route.private) {
                 return (
@@ -30,7 +24,7 @@ const AppRouter = () => {
                     {...route}
                   />
                 );
-              } else if (!(route.isLoginSignupRoute && isLoggedInAlready)) {
+              } else {
                 return (
                   <Route
                     key={index}
@@ -42,7 +36,6 @@ const AppRouter = () => {
                 );
               }
             })}
-          <Redirect to="/" />
         </Switch>
       </BrowserRouter>
     </div>
