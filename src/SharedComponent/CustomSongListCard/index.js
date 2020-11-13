@@ -19,50 +19,59 @@ const CustomListCard = ({
   };
 
   return (
-   /*  <div style={{ marginTop: 10, paddingBottom: lastElement ? 25 : 0 }}> */
-      <CustomPaper  styleProps={{  marginTop: 10,  backgroundColor: 'rgb(0,0,0,0.3)',
-    color: 'white',
-    borderRadius: '4px'}} elevation={5}   >
-        <div className={"listRootContainer"}>
-          <div className={"card-left-container"}>
-            <div className={"card-text-div-style"}>
-              <span><b>Song Title :&nbsp;</b></span>
-              <span>{songTitle}</span>
-            </div>
-            <div className={"card-text-div-style"}>
-              <small><b>Singers :&nbsp;</b></small>
-              <small>{singerName}</small>
-            </div>
-            <div className={"card-text-div-style"}>
-              <small>
-                <b>Album :&nbsp;</b>
-              </small>
-              <small>
-                <i>{albumName}</i>
-              </small>
-            </div>
+    <CustomPaper
+      styleProps={{
+        marginTop: 10,
+        backgroundColor: "rgb(0,0,0,0.3)",
+        color: "white",
+        borderRadius: "4px",
+        marginBottom: lastElement ? 25 : 0,
+      }}
+      elevation={5}
+    >
+      <div className={"listRootContainer"}>
+        <div className={"card-left-container"}>
+          <div className={"card-text-div-style"}>
+            <span>
+              <b>Song Title :&nbsp;</b>
+            </span>
+            <span>{songTitle}</span>
           </div>
-          <div
-            className={"card-right-container"}
-            style={
-              Boolean(mode !== "add") ? { justifyContent: "flex-end" } : {}
-            }
-          >
-            <div className={"card-text-div-style"}>
-              <small><b>Play Time :&nbsp;</b></small>
-              <small>{playTime}</small>
-            </div>
-            {Boolean(mode === "add") && (
-              <CustomButtonComponent
-              color={'inherit'}
-                handleOnClick={handleOnSelect}
-                title={isSelected ? "Delete" : "Add to list"}
-              />
-            )}
+          <div className={"card-text-div-style"}>
+            <small>
+              <b>Singers :&nbsp;</b>
+            </small>
+            <small>{singerName}</small>
+          </div>
+          <div className={"card-text-div-style"}>
+            <small>
+              <b>Album :&nbsp;</b>
+            </small>
+            <small>
+              <i>{albumName}</i>
+            </small>
           </div>
         </div>
-      </CustomPaper>
-  /*   </div> */
+        <div
+          className={"card-right-container"}
+          style={Boolean(mode !== "add") ? { justifyContent: "flex-end" } : {}}
+        >
+          <div className={"card-text-div-style"}>
+            <small>
+              <b>Play Time :&nbsp;</b>
+            </small>
+            <small>{playTime}</small>
+          </div>
+          {Boolean(mode === "add") && (
+            <CustomButtonComponent
+              color={"inherit"}
+              handleOnClick={handleOnSelect}
+              title={isSelected ? "Delete" : "Add to list"}
+            />
+          )}
+        </div>
+      </div>
+    </CustomPaper>
   );
 };
 

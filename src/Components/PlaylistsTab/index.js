@@ -1,19 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import moment from "moment";
 import CustomPlaylistCard from "../../SharedComponent/CustomPlaylistCard";
 
-const PlayliststabComponent = () => {
+const PlayliststabComponent = ({ handleOnselectPlaylist }) => {
   const playLists = useSelector((state) => state.commonReducer.playList);
-  
-  console.log(playLists)
+
+  const getDate = (time) => moment(time).format("DD MMM YYYY");
+
   return (
     <React.Fragment>
       {playLists.map((playlistItem, index) => (
         <CustomPlaylistCard
+          handleOnselectPlaylist={handleOnselectPlaylist}
           lastElement={index + 1 === playLists.length}
           key={playlistItem._id}
+          _id={playlistItem._id}
           playlistTitle={playlistItem.name}
-          playTime={playlistItem.createdAt}
+          createdAt={getDate(playlistItem.createdAt)}
+          createdBy={playlistItem.createdBy}
         />
       ))}
     </React.Fragment>

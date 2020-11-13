@@ -1,27 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   IconButton,
-  TextField,
+  Typography,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import CustomButtonComponent from "../CustomButtonComponent";
-import "./style.css";
+import "./../CreatePlaylistDialog/style.css";
 
-const CreatePlaylistDialog = ({ isOpen, handleClose, handleSubmit }) => {
-  const [playlistValue, setPlaylistValue] = useState("");
-  const [isError, setError] = useState(false);
-
-  const handleOnChangeOfValue = (event) => {
-    setError(!Boolean(event.target.value.length));
-    setPlaylistValue(event.target.value);
-  };
-
+const CustomSignUpLoginDialog = ({ isOpen, handleClose, handleSubmit }) => {
   const handleOnSubmit = () => {
-    if (handleSubmit) handleSubmit(playlistValue);
     handleClose();
   };
 
@@ -30,31 +21,23 @@ const CreatePlaylistDialog = ({ isOpen, handleClose, handleSubmit }) => {
       open={isOpen}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      maxWidth={"md"}
+      maxWidth={"xs"}
       fullWidth={true}
     >
       <DialogTitle
         style={{ background: "linear-gradient(to top,#00cdac,#02aab0)" }}
       >
-        <div className={"head-container"}>
-          <span>Create Playlist</span>
+        <div className={"head-container"} style={{ color: "white" }}>
+          <Typography variant="h5">Need to Login / Sign up</Typography>
           <IconButton onClick={handleClose} aria-label="delete" size="medium">
             <CloseIcon fontSize="inherit" />
           </IconButton>
         </div>
       </DialogTitle>
-      <DialogContent>
-        <TextField
-          variant="outlined"
-          value={playlistValue}
-          error={isError}
-          helperText={isError ? "Cannot Be Blank" : ""}
-          label="Name of PlayList"
-          required
-          fullWidth
-          onChange={handleOnChangeOfValue}
-        />
-        <div style={{ width: 20 }} />
+      <DialogContent dividers style={{ height: 50, alignItems: "center" }}>
+        <Typography variant="h5">
+          Sign up or login to create a playlist
+        </Typography>
       </DialogContent>
       <DialogActions
         style={{
@@ -63,9 +46,13 @@ const CreatePlaylistDialog = ({ isOpen, handleClose, handleSubmit }) => {
         }}
       >
         <CustomButtonComponent
-          disabled={!Boolean(playlistValue.length)}
-          title={"Create Playlist"}
           color={"inherit"}
+          title={"Login"}
+          handleOnClick={handleOnSubmit}
+        />
+        <CustomButtonComponent
+          color={"inherit"}
+          title={"Sign up"}
           handleOnClick={handleOnSubmit}
         />
         <div style={{ width: 20 }} />
@@ -74,4 +61,4 @@ const CreatePlaylistDialog = ({ isOpen, handleClose, handleSubmit }) => {
   );
 };
 
-export default CreatePlaylistDialog;
+export default CustomSignUpLoginDialog;

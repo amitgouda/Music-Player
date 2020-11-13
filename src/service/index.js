@@ -1,8 +1,5 @@
 import axios from "axios";
-
-const getToken = () => {
-  return "";
-};
+import { getToken } from "../SharedComponent/helpers/common";
 
 const parsedError = (error) => {
   let response;

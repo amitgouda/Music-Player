@@ -3,26 +3,43 @@ import CustomPaper from "../CustomPaper";
 import "./style.css";
 
 const CustomPlayListCard = ({
-  playlistTitle = "asdasds",
-  playTime = "asdasds",
+  playlistTitle = "",
+  createdAt = "",
   lastElement,
+  handleOnselectPlaylist,
+  _id,
+  createdBy
 }) => {
   return (
-    <div style={{ marginTop: 10, paddingBottom: lastElement ? 25 : 0 }}>
-      <CustomPaper elevation={5}>
-        <div className={"listRootContainer"}>
-          <div>
-            <div className={"card-text-div-style"}>
-              <span>{playlistTitle}</span>
-            </div>
-          </div>
+    <CustomPaper
+      styleProps={{
+        marginTop: 10,
+        backgroundColor: "rgb(0,0,0,0.3)",
+        color: "white",
+        borderRadius: "4px",
+        cursor: 'pointer',
+        marginBottom: lastElement ? 25 : 0,
+      }}
+      elevation={5}
+      onClick={() => handleOnselectPlaylist(_id,playlistTitle,createdBy)}
+    >
+      <div className={"listRootContainer"}>
+        <div>
           <div className={"card-text-div-style"}>
-            <span>Created At : </span>
-            <span>{playTime}</span>
+            <small>
+              <b>Title :&nbsp;</b>
+            </small>
+            <small>{playlistTitle}</small>
           </div>
         </div>
-      </CustomPaper>
-    </div>
+        <div className={"card-text-div-style"}>
+          <small>
+            <b>Created At :&nbsp;</b>
+          </small>
+          <small>{createdAt}</small>
+        </div>
+      </div>
+    </CustomPaper>
   );
 };
 

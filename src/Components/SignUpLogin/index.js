@@ -13,11 +13,12 @@ import {
 } from "@material-ui/core";
 import { loginApi, signUpApi } from "../../service/auth.service";
 import { useHistory, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-
+import { connect, useDispatch } from "react-redux";
+import { setUserState } from "../../Actions/common";
 import "./style.css";
 
 const SignUp = ({ classes, match, ...props }) => {
+  const dispatch = useDispatch();
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [password, setPassword] = useState("");
@@ -96,8 +97,13 @@ const SignUp = ({ classes, match, ...props }) => {
     if (!isEmptyObject(res.data)) {
       const userData = {
         token: String(res.data.token),
+        _id: res.data?._id || "",
+        email: res.data?.email || ""
       };
       localStorage.setItem("userData", JSON.stringify(userData));
+      dispatch(
+        setUserState({ _id: res.data?._id || "", email: res.data?.email || "" })
+      );
       history.push("/");
     }
   };
@@ -287,9 +293,6 @@ const SignUp = ({ classes, match, ...props }) => {
                   >
                     {isFromLoginUrl ? "Sign in" : "Sign Up"}
                   </Button>
-                </Grid>
-                <Grid item xs={12} className="or_grid">
-                  OR
                 </Grid>
                 <Grid item xs={12}>
                   <div className="google-login-button" data-width="100%"></div>

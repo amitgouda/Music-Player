@@ -38,3 +38,10 @@ export const setPlaylistState = (data = []) => {
     payload: data,
   };
 };
+
+export const setUserState = (data = {}) => {
+  return {
+    type: commonActionType.SET_USER_DATA,
+    payload: data,
+  };
+};
