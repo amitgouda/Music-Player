@@ -57,7 +57,7 @@ const SongstabComponent = ({ mode, toggleProceedButton, selectedPlaylist }) => {
         )
       );
     }
-  }, [searchString, songLists]);
+  }, [searchString, songLists,mode,playLists,selectedPlaylist]);
 
   useEffect(() => {
     window.addEventListener("shuffle-songs", shuffleSongsList);

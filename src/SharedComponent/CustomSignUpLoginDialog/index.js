@@ -11,9 +11,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import CustomButtonComponent from "../CustomButtonComponent";
 import "./../CreatePlaylistDialog/style.css";
 
-const CustomSignUpLoginDialog = ({ isOpen, handleClose, handleSubmit }) => {
-  const handleOnSubmit = () => {
-    handleClose();
+const CustomSignUpLoginDialog = ({ isOpen, handleClose }) => {
+  const handleOnSubmit = (url) => {
+    handleClose(url);
   };
 
   return (
@@ -48,12 +48,12 @@ const CustomSignUpLoginDialog = ({ isOpen, handleClose, handleSubmit }) => {
         <CustomButtonComponent
           color={"inherit"}
           title={"Login"}
-          handleOnClick={handleOnSubmit}
+          handleOnClick={()=>handleOnSubmit('/login')}
         />
         <CustomButtonComponent
           color={"inherit"}
           title={"Sign up"}
-          handleOnClick={handleOnSubmit}
+          handleOnClick={()=>handleOnSubmit('/signup')}
         />
         <div style={{ width: 20 }} />
       </DialogActions>

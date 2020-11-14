@@ -6,6 +6,7 @@ import {
   DialogActions,
   IconButton,
   TextField,
+  Typography
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import CustomButtonComponent from "../CustomButtonComponent";
@@ -36,8 +37,8 @@ const CreatePlaylistDialog = ({ isOpen, handleClose, handleSubmit }) => {
       <DialogTitle
         style={{ background: "linear-gradient(to top,#00cdac,#02aab0)" }}
       >
-        <div className={"head-container"}>
-          <span>Create Playlist</span>
+        <div className={"head-container"} style={{ color: "white" }}>
+          <Typography variant="h5">Create Playlist</Typography>
           <IconButton onClick={handleClose} aria-label="delete" size="medium">
             <CloseIcon fontSize="inherit" />
           </IconButton>

@@ -14,7 +14,7 @@ import {
 import { loginApi, signUpApi } from "../../service/auth.service";
 import { useHistory, withRouter } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { setUserState,toggleSnackBar } from "../../Actions/common";
+import { setUserState, toggleSnackBar } from "../../Actions/common";
 import "./style.css";
 
 const SignUp = ({ classes, match, ...props }) => {
@@ -63,7 +63,6 @@ const SignUp = ({ classes, match, ...props }) => {
   const isEmptyObject = (data) =>
     Object.keys(data).length === 0 && data.constructor === Object;
 
-
   const handleOnSignUpSuccess = () => {
     dispatch(toggleSnackBar(true, "User has been sucessfully signup"));
     setfirstName("");
@@ -71,6 +70,10 @@ const SignUp = ({ classes, match, ...props }) => {
     setEmail("");
     setPassword("");
     history.push("/login");
+  };
+
+  const signupFaultHandler = (err) => {
+    dispatch(toggleSnackBar(true, err.message));
   };
 
   const handleOnLoginSignup = (e) => {
@@ -84,25 +87,33 @@ const SignUp = ({ classes, match, ...props }) => {
             email,
             password,
           },
-          handleOnSignUpSuccess
+          handleOnSignUpSuccess,
+          signupFaultHandler
         );
       }
     } else {
       if (validate()) {
-        loginApi({ email, password: password }, signinResultjandler);
+        loginApi(
+          { email, password: password },
+          signinResultjandler,
+          signinFaultHandler
+        );
       }
     }
   };
 
+  const signinFaultHandler = (err) => {
+    dispatch(toggleSnackBar(true, err.message));
+  };
+
   const signinResultjandler = (res) => {
     if (!isEmptyObject(res.data)) {
-
       dispatch(toggleSnackBar(true, "Sucessfully logged in"));
 
       const userData = {
         token: String(res.data.token),
         _id: res.data?._id || "",
-        email: res.data?.email || ""
+        email: res.data?.email || "",
       };
       localStorage.setItem("userData", JSON.stringify(userData));
       dispatch(
@@ -164,7 +175,7 @@ const SignUp = ({ classes, match, ...props }) => {
                           });
                         setfirstName(event.target.value);
                       }}
-                      FormControlLabel={firstName}
+                      value={firstName}
                     />
                   </Grid>
                 )}
@@ -203,7 +214,7 @@ const SignUp = ({ classes, match, ...props }) => {
                         setlastName(event.target.value);
                       }}
                       autoFocus={false}
-                      FormControlLabel={lastName}
+                      value={lastName}
                     />
                   </Grid>
                 )}
@@ -242,7 +253,7 @@ const SignUp = ({ classes, match, ...props }) => {
                         });
                       setEmail(event.target.value);
                     }}
-                    FormControlLabel={email}
+                    value={email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -281,7 +292,7 @@ const SignUp = ({ classes, match, ...props }) => {
                         });
                       setPassword(event.target.value);
                     }}
-                    FormControlLabel={password}
+                    value={password}
                   />
                 </Grid>
               </Grid>

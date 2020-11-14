@@ -64,6 +64,7 @@ const HomeComponents = () => {
   };
 
   const handleOnSubmitCreatePlaylistModal = (playlistValue) => {
+    setPlayListMode("show");
     addPlaylistApi(
       {
         name: playlistValue,
@@ -126,8 +127,9 @@ const HomeComponents = () => {
     setShowProceed(!Boolean(data.length));
   };
 
-  const handleOnCloseAuthModal = () => {
+  const handleOnCloseAuthModal = (url) => {
     toggleopenAuthModal(false);
+    history.push(url);
   };
 
   const handleOnCloseAddSongsModal = () => {

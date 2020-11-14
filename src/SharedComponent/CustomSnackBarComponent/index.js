@@ -5,10 +5,6 @@ import Slide from "@material-ui/core/Slide";
 import { useDispatch } from "react-redux";
 import { toggleSnackBar } from "../../Actions/common";
 
-function SlideTransition(props) {
-  return <Slide {...props} direction="up" />;
-}
-
 const TransitionsSnackbar = ({ isOpen, message }) => {
   const dispatch = useDispatch();
   const [Transition] = useState(Slide);
@@ -20,7 +16,7 @@ const TransitionsSnackbar = ({ isOpen, message }) => {
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      autoHideDuration={1500}
+      autoHideDuration={2500}
       open={isOpen}
       onClose={handleClose}
       TransitionComponent={Transition}
