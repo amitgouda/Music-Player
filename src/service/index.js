@@ -50,7 +50,7 @@ const parseBody = (response) => {
 };
 
 const instance = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: "https://vbimusicplayerserver.herokuapp.com/api/",
 });
 
 instance.interceptors.request.use(
