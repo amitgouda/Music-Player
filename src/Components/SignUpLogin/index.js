@@ -23,6 +23,7 @@ const SignUp = ({ classes, match, ...props }) => {
   const [lastName, setlastName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const history = useHistory();
   const [errorObject, setErrorObject] = useState({
     inValidFirstName: true,
     inValidLastName: false,
@@ -62,7 +63,6 @@ const SignUp = ({ classes, match, ...props }) => {
   const isEmptyObject = (data) =>
     Object.keys(data).length === 0 && data.constructor === Object;
 
-  const history = useHistory();
 
   const handleOnSignUpSuccess = () => {
     dispatch(toggleSnackBar(true, "User has been sucessfully signup"));

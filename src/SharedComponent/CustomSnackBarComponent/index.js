@@ -20,7 +20,7 @@ const TransitionsSnackbar = ({ isOpen, message }) => {
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      autoHideDuration={5000}
+      autoHideDuration={1500}
       open={isOpen}
       onClose={handleClose}
       TransitionComponent={Transition}

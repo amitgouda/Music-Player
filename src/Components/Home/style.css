@@ -12,12 +12,11 @@
   flex-direction: column;
 }
 .mainTabContainer {
-  padding-left: 30px;
-  padding-right: 30px;
   align-items: center;
-  justify-items: center;
+  justify-content: space-between;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  color: white;
 }
 .option-container{
   display: flex;

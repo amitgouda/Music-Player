@@ -18,12 +18,14 @@ import {
   setSongsState,
   setPlaylistState,
   toggleSnackBar,
+  setUserState,
 } from "../../Actions/common";
 import CreatePlaylistDialog from "../../SharedComponent/CreatePlaylistDialog";
 import CustomSignUpLoginDialog from "../../SharedComponent/CustomSignUpLoginDialog";
 import { authenticate } from "../../SharedComponent/helpers/common";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import CustomAddSongsDialog from "../../SharedComponent/CustomAddSongsDialog";
+import { useHistory } from "react-router-dom";
 
 import "./style.css";
 
@@ -42,9 +44,11 @@ const HomeComponents = () => {
   });
   const selectedSongsIdArray = useRef([]);
   const dispatch = useDispatch();
+  const history = useHistory();
   const handleOntabChange = useCallback((event, newValue) => {
     setActiveTabs(newValue);
   }, []);
+  const isAuthenticate = authenticate();
 
   const handleOnBottomButtonClick = () => {
     if (activeTabs) {
@@ -130,6 +134,14 @@ const HomeComponents = () => {
     setOpenAddSongsDialog(false);
   };
 
+  const handleOnClickAuthButton = () => {
+    if (isAuthenticate) {
+      dispatch(toggleSnackBar(true, "Sucessfully logged out"));
+      localStorage.clear();
+      dispatch(setUserState({ _id: "", email: "" }));
+    } else history.push("/login");
+  };
+
   const handleOnSubmitAddSongs = (songsArray) => {
     updatePlaylistApi(
       { playListId: selectedPlaylist._id, songsArray },
@@ -198,6 +210,7 @@ const HomeComponents = () => {
       <div className={"rootContainer"}>
         <div className={"searchtabContainer"}>
           <div className={"mainTabContainer"}>
+            <div style={{ width: 20 }} />
             <CustomTabsComponent
               handleChange={handleOntabChange}
               activeValue={activeTabs}
@@ -205,6 +218,12 @@ const HomeComponents = () => {
                 { label: "All  Songs", icon: <LibraryMusicIcon /> },
                 { label: "Playlists", icon: <FeaturedPlayListIcon /> },
               ]}
+            />
+
+            <CustomButtonComponent
+              handleOnClick={handleOnClickAuthButton}
+              title={authenticate() ? "Log out" : "Sign in"}
+              color={"inherit"}
             />
           </div>
           {playListMode === "view_songs_in_playlist" ? (
@@ -244,13 +263,13 @@ const HomeComponents = () => {
             {Boolean(activeTabs) &&
               (playListMode === "add" ? (
                 <CreatePlaylistOption />
-              ) : (
+              ) : playListMode !== "view_songs_in_playlist" ? (
                 <CustomButtonComponent
                   color={"inherit"}
                   handleOnClick={handleOnBottomButtonClick}
                   title={!activeTabs ? "Add Song" : "Create Playlist"}
                 />
-              ))}
+              ) : null)}
           </div>
         </div>
       </div>
