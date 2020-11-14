@@ -11,10 +11,14 @@ import { getAllSongApi } from "../../service/song.service";
 import {
   getAllPlaylistApi,
   addPlaylistApi,
-  updatePlaylistApi
+  updatePlaylistApi,
 } from "../../service/playlist.service";
 import { useDispatch, useSelector } from "react-redux";
-import { setSongsState, setPlaylistState } from "../../Actions/common";
+import {
+  setSongsState,
+  setPlaylistState,
+  toggleSnackBar,
+} from "../../Actions/common";
 import CreatePlaylistDialog from "../../SharedComponent/CreatePlaylistDialog";
 import CustomSignUpLoginDialog from "../../SharedComponent/CustomSignUpLoginDialog";
 import { authenticate } from "../../SharedComponent/helpers/common";
@@ -62,6 +66,7 @@ const HomeComponents = () => {
         songsIdArray: selectedSongsIdArray.current,
       },
       (res) => {
+        dispatch(toggleSnackBar(true, "Playlist has been sucessfully created"));
         getPlaylistData();
       }
     );
@@ -79,7 +84,7 @@ const HomeComponents = () => {
     if (!activeTabs) {
       setShowProceed(true);
       if (playListMode !== "show") {
-        resetPlaylistdata()
+        resetPlaylistdata();
       }
     }
   }, [activeTabs, playListMode]);
@@ -90,14 +95,14 @@ const HomeComponents = () => {
     );
   }, [selectedPlaylist]);
 
-const resetPlaylistdata = () => {
-  setPlayListMode("show");
-  setSelectedPlaylist({
-    _id: "",
-    name: "",
-    createdBy: "",
-  });
-}
+  const resetPlaylistdata = () => {
+    setPlayListMode("show");
+    setSelectedPlaylist({
+      _id: "",
+      name: "",
+      createdBy: "",
+    });
+  };
 
   const getPlaylistData = useCallback(() => {
     getAllPlaylistApi({}, (res) => {
@@ -122,15 +127,19 @@ const resetPlaylistdata = () => {
   };
 
   const handleOnCloseAddSongsModal = () => {
-    setOpenAddSongsDialog(false)
+    setOpenAddSongsDialog(false);
   };
 
   const handleOnSubmitAddSongs = (songsArray) => {
-    updatePlaylistApi({playListId:selectedPlaylist._id , songsArray},(res)=>{
-      resetPlaylistdata()
-      getPlaylistData()
-    })
-  }
+    updatePlaylistApi(
+      { playListId: selectedPlaylist._id, songsArray },
+      (res) => {
+        dispatch(toggleSnackBar(true, "Playlist has been sucessfully updated"));
+        resetPlaylistdata();
+        getPlaylistData();
+      }
+    );
+  };
 
   const handleOnPressBack = () => {
     setPlayListMode("show");

@@ -1,6 +1,7 @@
 import commonActionTypes from "../Actions/ActionTypes/common";
 import { getLocalStorageData } from "../SharedComponent/helpers/common";
 const iState = {
+  isSnackBarOpen:false,
   isOpen: false,
   messageType: "",
   message: "",
@@ -17,7 +18,6 @@ const appReducer = (state = iState, action) => {
   switch (action.type) {
     case commonActionTypes.TOGGLE_SNACK_BAR:
       state.isSnackBarOpen = action.isSnackBarOpen;
-      state.messageType = action.messageType;
       state.message = action.message;
       break;
     case commonActionTypes.TOGGLE_MODAL:

@@ -1,10 +1,9 @@
 import commonActionType from "./ActionTypes/common";
 
-export const toggleSnackBar = (open, messageType = "", message = "") => {
+export const toggleSnackBar = (open, message = "") => {
   return {
     type: commonActionType.TOGGLE_SNACK_BAR,
     isSnackBarOpen: open,
-    messageType,
     message,
   };
 };

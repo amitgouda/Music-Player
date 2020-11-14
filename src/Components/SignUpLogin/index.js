@@ -14,7 +14,7 @@ import {
 import { loginApi, signUpApi } from "../../service/auth.service";
 import { useHistory, withRouter } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { setUserState } from "../../Actions/common";
+import { setUserState,toggleSnackBar } from "../../Actions/common";
 import "./style.css";
 
 const SignUp = ({ classes, match, ...props }) => {
@@ -65,6 +65,7 @@ const SignUp = ({ classes, match, ...props }) => {
   const history = useHistory();
 
   const handleOnSignUpSuccess = () => {
+    dispatch(toggleSnackBar(true, "User has been sucessfully signup"));
     setfirstName("");
     setlastName("");
     setEmail("");
@@ -95,6 +96,9 @@ const SignUp = ({ classes, match, ...props }) => {
 
   const signinResultjandler = (res) => {
     if (!isEmptyObject(res.data)) {
+
+      dispatch(toggleSnackBar(true, "Sucessfully logged in"));
+
       const userData = {
         token: String(res.data.token),
         _id: res.data?._id || "",
